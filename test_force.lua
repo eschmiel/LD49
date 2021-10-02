@@ -6,26 +6,37 @@ testforce.engagement = 0
 minimum_engagement = -10
 maximum_engagement = 10
 
-function commune_with_force(topic) 
+function generate_cosmic_force()
+    cosmic_force = {}
+    cosmic_force.engagement = 0
+    cosmic_force.disposition = {}
+
+    for x=1, #topics do
+        cosmic_force.disposition[x] = flr(rnd(11)) - 5
+    end
+
+    return cosmic_force
+end
+
+function commune_with_force(force, topic) 
     topic_number = topics[topic]
 
-    testforce.engagement += testforce.disposition[topic_number]
+    force.engagement += force.disposition[topic_number]
 
-    if (testforce.engagement < minimum_engagement) testforce.engagement = minimum_engagement
-    if (testforce.engagement > maximum_engagement) testforce.engagement = maximum_engagement
+    if (force.engagement < minimum_engagement) force.engagement = minimum_engagement
+    if (force.engagement > maximum_engagement) force.engagement = maximum_engagement
     
 end
 
-function display_force_status()
+function display_force_status(force)
     status_color = 11
-    if (testforce.engagement == minimum_engagement or testforce.engagement == maximum_engagement) status_color = 8
-    print("force engagement: "..testforce.engagement, 20, 20, status_color)
+    if (force.engagement == minimum_engagement or force.engagement == maximum_engagement) status_color = 8
+    print("force engagement: "..force.engagement, 20, 20, status_color)
+    print(''..topics[1]..': '..force.disposition[1], 10, 30)
+    print(''..topics[2]..': '..force.disposition[2], 10, 36)
+    print(topics[3]..': '..force.disposition[3], 10, 46)
+    print(topics[4]..': '..force.disposition[4], 67, 30)
+    print(topics[5]..': '..force.disposition[5], 67, 36)
+    print(topics[6]..': '..force.disposition[6], 67, 46)
+    
 end
-
-topics = {}
-topics.dreams = 1
-topics.nightmares = 2
-topics.hope = 3
-topics.despair = 4
-topics.theland = 5
-topics.thesea = 6

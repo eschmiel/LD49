@@ -14,6 +14,8 @@ function _init()
 	option4 = createtextoption("land ho!\ni can't wait\n to buy a\n   house", {'theland'}, 4)
 
 	selected = 1
+
+	cosmic_force = generate_cosmic_force()
 end
 
 function _update()
@@ -54,10 +56,10 @@ function _update()
 	end
 
 	if btnp(4) then
-		if (selected == 1) commune_with_force(option1.topics[1])
-		if (selected == 2) commune_with_force(option2.topics[1])
-		if (selected == 3) commune_with_force(option3.topics[1])
-		if (selected == 4) commune_with_force(option4.topics[1])
+		if (selected == 1) commune_with_force(cosmic_force, option1.topics[1])
+		if (selected == 2) commune_with_force(cosmic_force, option2.topics[1])
+		if (selected == 3) commune_with_force(cosmic_force, option3.topics[1])
+		if (selected == 4) commune_with_force(cosmic_force, option4.topics[1])
 	end
 end
 
@@ -67,12 +69,13 @@ function _draw()
  drawtextoption(option2)
  drawtextoption(option3)
  drawtextoption(option4)
- display_force_status()
+ display_force_status(cosmic_force)
 end
 -->8
 --textoption
 #include text_option.lua 
 #include test_force.lua
+#include topics.lua
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
