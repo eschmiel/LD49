@@ -10,6 +10,9 @@ function _init()
 	"when i close\nmy eyes, all \n i see is\n 'bazinga'",
 	{"nightmares"}, 2)
 	
+	option3 = createtextoption("i hope this\nis the right\nthing to say", {'hope'}, 3)
+	option4 = createtextoption("land ho!\ni can't wait\n to buy a\n   house", {'theland'}, 4)
+
 	selected = 1
 end
 
@@ -40,62 +43,37 @@ function _update()
 	else option2.selected = false
 	end
 	
+	if option3.position == selected
+	then option3.selected = true
+	else option3.selected = false
+	end
+
+	if option4.position == selected
+	then option4.selected = true
+	else option4.selected = false
+	end
+
+	if btnp(4) then
+		if (selected == 1) commune_with_force(option1.topics[1])
+		if (selected == 2) commune_with_force(option2.topics[1])
+		if (selected == 3) commune_with_force(option3.topics[1])
+		if (selected == 4) commune_with_force(option4.topics[1])
+	end
 end
 
 function _draw()
  cls(1)
  drawtextoption(option1)
  drawtextoption(option2)
+ drawtextoption(option3)
+ drawtextoption(option4)
+ display_force_status()
 end
 -->8
 --textoption
+#include text_option.lua 
+#include test_force.lua
 
-function createtextoption(text,
-topics, position)
-
-	textoption = {}
-	if position == 1 then
-		textoption.x = 5
-		textoption.y = 50
-	elseif position == 2 then
-		textoption.x = 66
-		textoption.y = 50
-	elseif position == 3 then
-		textoption.x = 5
-		textoption.y = 80
-	else
-		textoption.x = 66
-		textoption.y = 80
-	end
-	
-	textoption.position = position
-	textoption.text = text
-	textoption.topics = topics
-	textoption.selected = false
-	
-	return textoption
-end
-
-function drawtextoption(textoption)
-	if textoption.selected then
-		boxcolor = 7
-	else
-		boxcolor = 6
-	end
-	
-	width = 56
-	height = 30
-	
-	endx = width + textoption.x
-	endy = height + textoption.y
-	
-	textx = textoption.x + 5
-	texty = textoption.y + 5
-	
-	rect(textoption.x, textoption.y,
-						endx, endy, boxcolor)
-	print(textoption.text, textx, texty)
-end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
