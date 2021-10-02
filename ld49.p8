@@ -2,6 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 33
 __lua__
 function _init()
+	
 	option1 = createtextoption(
 	"an oyster's\npearl is the\n finest of\n  dreams",
 	{"thesea", "dreams"}, 1)
@@ -15,6 +16,8 @@ function _init()
 
 	selected = 1
 
+	dialogue_options = {option1, option2, option3, option4}
+	
 	cosmic_force = generate_cosmic_force()
 end
 

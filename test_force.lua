@@ -18,7 +18,7 @@ function generate_cosmic_force()
     return cosmic_force
 end
 
-function commune_with_force(force, topic) 
+function commune_with_force(topic) 
     topic_number = topics[topic]
 
     force.engagement += force.disposition[topic_number]
@@ -26,6 +26,10 @@ function commune_with_force(force, topic)
     if (force.engagement < minimum_engagement) force.engagement = minimum_engagement
     if (force.engagement > maximum_engagement) force.engagement = maximum_engagement
     
+end
+
+function convey_topic_to_force(topic)
+
 end
 
 function display_force_status(force)
