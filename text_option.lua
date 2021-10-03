@@ -1,4 +1,4 @@
-function createtextoption(text,
+function create_text_option(text,
     topics, position)
 
         column1x = 5
@@ -24,13 +24,13 @@ function createtextoption(text,
         
         textoption.position = position
         textoption.text = text
-        textoption.topics = topics
+        textoption.topics = convert_to_topic_numbers(topics)
         textoption.selected = false
         
         return textoption
     end
     
-    function drawtextoption(textoption)
+    function draw_text_option(textoption)
         if textoption.selected then
             boxcolor = 14
         else
@@ -50,3 +50,15 @@ function createtextoption(text,
                             endx, endy, boxcolor)
         print(textoption.text, textx, texty)
     end
+
+    function convert_to_topic_numbers(target_topics)
+        topic_numbers = {}
+        for topic in all(target_topics) do
+            for topic_index=1, #master_topic_list do
+                if (master_topic_list[topic_index] == topic) add(topic_numbers, topic_index)
+            end
+        end
+
+        return topic_numbers
+    end
+
