@@ -1,8 +1,3 @@
-testforce = {}
-
-testforce.disposition = {1, -2, -4, 2, -1, 5}
-testforce.engagement = 0
-
 minimum_engagement = -10
 maximum_engagement = 10
 
@@ -20,14 +15,20 @@ end
 
 function commune_with_force(force, topic) 
     force.engagement += force.disposition[topic]
-
+--[[
     if (force.engagement < minimum_engagement) force.engagement = minimum_engagement
     if (force.engagement > maximum_engagement) force.engagement = maximum_engagement
+]]
+end
+
+function force_muses()
+    print("there is such vigor\n in the world. \nroaring, biting, stinging, \nfeasting, fornicating. \na bear's belly of wobbling\n swollen succulence. \ni am such a glutton for life.", 5, 10)
+    --print("have you ever labored in\n futility? to work so \nhard towards an impossible \n goal? was it worth it?", 10, 20)
 end
 
 function display_force_status(force)
     status_color = 11
-    if (force.engagement == minimum_engagement or force.engagement == maximum_engagement) status_color = 8
+    if (game_lose) status_color = 8
     print("force engagement: "..force.engagement, 20, 20, status_color)
     print(master_topic_list[1]..': '..force.disposition[1], 10, 30)
     print(master_topic_list[2]..': '..force.disposition[2], 10, 36)

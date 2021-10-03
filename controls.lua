@@ -16,6 +16,8 @@ function play_controls()
         for topic_index=1, #dialogue_options[selected].topics do
             chosen_topic = dialogue_options[selected].topics[topic_index]
             commune_with_force(cosmic_force, chosen_topic)
-        end         
+        end
+
+        current_turn += 1
     end
 end
