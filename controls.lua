@@ -17,7 +17,7 @@ function play_controls()
             chosen_topic = dialogue_options[selected].topics[topic_index]
             commune_with_force(cosmic_force, chosen_topic)
         end
-
+        cosmic_force.new_prompt()
         current_turn += 1
     end
 end

@@ -23,6 +23,9 @@ function _init()
 	game_win = false
 	game_lose = false
 	current_turn = 1
+
+	aggressive_prompts = get_aggressive_prompts()
+	content_prompts = get_content_prompts()
 end
 
 function _update()
@@ -62,6 +65,7 @@ end
 #include cosmic_force.lua
 #include topics.lua
 #include controls.lua
+#include cosmic_force_prompts.lua
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

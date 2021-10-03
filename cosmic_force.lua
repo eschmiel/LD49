@@ -10,6 +10,10 @@ function generate_cosmic_force()
         cosmic_force.disposition[x] = flr(rnd(11)) - 5
     end
 
+    cosmic_force.new_prompt = function() 
+        cosmic_force.prompt = flr(rnd(12))
+    end
+
     return cosmic_force
 end
 
@@ -22,8 +26,9 @@ function commune_with_force(force, topic)
 end
 
 function force_muses()
-    print("there is such vigor\n in the world. \nroaring, biting, stinging, \nfeasting, fornicating. \na bear's belly of wobbling\n swollen succulence. \ni am such a glutton for life.", 5, 10)
+    --print("there is such vigor\n in the world. \nroaring, biting, stinging, \nfeasting, fornicating. \na bear's belly of wobbling\n swollen succulence. \ni am such a glutton for life.", 5, 10)
     --print("have you ever labored in\n futility? to work so \nhard towards an impossible \n goal? was it worth it?", 10, 20)
+    print(content_prompts[cosmic_force.prompt], 10, 5)
 end
 
 function display_force_status(force)
