@@ -42,13 +42,20 @@ function _draw()
  draw_text_option(option2)
  draw_text_option(option3)
  draw_text_option(option4)
- draw_atmosphere[6]()
+print(ceil((cosmic_force.engagement + 11) / 2), 0, 7)
+danger_level = ceil((cosmic_force.engagement + 11) / 2), 0, 7
+if (danger_level > 11) danger_level = 11
+if(danger_level < 1 ) danger_level = 1
+ draw_atmosphere[danger_level](cosmic_force.stars)
+ print(danger_level, 0, 0, 7)
  --display_force_status(cosmic_force)
 force_muses()
+
 
 --print('turn: '..current_turn..' win at: 10', 1, 1, 7)
  if(game_lose) print('You lose', 50, 50, 7)
  if(game_win) print('YOU WIN?!?', 50, 50, 7)
+ col = 7
 end
 
 function check_game_win(turn)

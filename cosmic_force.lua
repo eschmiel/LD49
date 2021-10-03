@@ -38,12 +38,15 @@ function generate_cosmic_force()
             add(cosmic_force.used_content_prompts, potential_prompt)
         end
     end
---[[
-    cosmic_force.generate_stars = function(number_of_stars)
 
-        5 * (cosmic_force.engagement -10)
+    cosmic_force.create_stars = function()
 
-    end]]
+        number_of_stars = 5 * (cosmic_force.engagement -10)
+
+        cosmic_force.stars = generate_stars(number_of_stars)
+    end
+
+    cosmic_force.create_stars()
 
 
     return cosmic_force
@@ -51,6 +54,7 @@ end
 
 function commune_with_force(force, topic) 
     force.engagement += force.disposition[topic]
+    force.create_stars()
 --[[
     if (force.engagement < minimum_engagement) force.engagement = minimum_engagement
     if (force.engagement > maximum_engagement) force.engagement = maximum_engagement
