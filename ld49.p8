@@ -37,16 +37,18 @@ function _update()
 end
 
 function _draw()
- cls(1)
+ cls(0)
  draw_text_option(option1)
  draw_text_option(option2)
  draw_text_option(option3)
  draw_text_option(option4)
+ draw_atmosphere[6]()
  --display_force_status(cosmic_force)
 force_muses()
-print('turn: '..current_turn..' win at: 10', 1, 1)
- if(game_lose) print('You lose', 50, 50)
- if(game_win) print('YOU WIN?!?', 50, 50)
+
+--print('turn: '..current_turn..' win at: 10', 1, 1, 7)
+ if(game_lose) print('You lose', 50, 50, 7)
+ if(game_win) print('YOU WIN?!?', 50, 50, 7)
 end
 
 function check_game_win(turn)
@@ -66,6 +68,7 @@ end
 #include topics.lua
 #include controls.lua
 #include cosmic_force_prompts.lua
+#include atmosphere.lua
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

@@ -5,14 +5,46 @@ function generate_cosmic_force()
     cosmic_force = {}
     cosmic_force.engagement = 0
     cosmic_force.disposition = {}
+    cosmic_force.used_aggressive_prompts = {}
+    cosmic_force.used_content_prompts = {}
+    cosmic_force.stars = {}
 
     for x=1, #master_topic_list do
-        cosmic_force.disposition[x] = flr(rnd(11)) - 5
+        cosmic_force.disposition[x] = ceil(rnd(11)) - 5
     end
 
-    cosmic_force.new_prompt = function() 
-        cosmic_force.prompt = flr(rnd(12))
+    cosmic_force.verify_prompt = function(prompt_number)
+        checked_prompt_list = cosmic_force.used_content_prompts
+        if (cosmic_force.engagement < 0) checked_prompt_list = cosmic_force.used_aggressive_prompts
+
+        for prompt in all(checked_prompt_list) do 
+            if (prompt == prompt_number) return false
+        end
+        return true
     end
+
+
+    cosmic_force.new_prompt = function() 
+        potential_prompt = ceil(rnd(12))
+        while(not cosmic_force.verify_prompt(potential_prompt)) do
+            potential_prompt = ceil(rnd(12))
+        end
+        
+        cosmic_force.prompt = potential_prompt
+
+        if(cosmic_force.engagement < 0) then 
+            add(cosmic_force.used_aggressive_prompts, potential_prompt)
+        else 
+            add(cosmic_force.used_content_prompts, potential_prompt)
+        end
+    end
+--[[
+    cosmic_force.generate_stars = function(number_of_stars)
+
+        5 * (cosmic_force.engagement -10)
+
+    end]]
+
 
     return cosmic_force
 end
@@ -28,7 +60,8 @@ end
 function force_muses()
     --print("there is such vigor\n in the world. \nroaring, biting, stinging, \nfeasting, fornicating. \na bear's belly of wobbling\n swollen succulence. \ni am such a glutton for life.", 5, 10)
     --print("have you ever labored in\n futility? to work so \nhard towards an impossible \n goal? was it worth it?", 10, 20)
-    print(content_prompts[cosmic_force.prompt], 10, 5)
+    print(content_prompts[cosmic_force.prompt], 10, 5, 6)
+    --print('engagement: '..cosmic_force.engagement, 10, 40, 0)
 end
 
 function display_force_status(force)
