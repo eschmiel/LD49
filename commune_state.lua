@@ -1,5 +1,8 @@
+function update_commune()
+    commune_controls()
+end
 
-function response_controls() 
+function commune_controls() 
 
     if (btnp(⬆️)) selected -= 2
     if (btnp(⬅️)) selected -= 1
@@ -23,4 +26,14 @@ function response_controls()
 
         musing = false
     end
+end
+
+function draw_commune()
+    draw_text_option(option1)
+    draw_text_option(option2)
+    draw_text_option(option3)
+    draw_text_option(option4)
+
+    draw_atmosphere[danger_level](cosmic_force.stars)
+    if (musing) force_muses() else end_muse()
 end

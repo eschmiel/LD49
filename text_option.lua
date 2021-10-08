@@ -7,6 +7,9 @@ function create_text_option(text,
         row1y = 57
         row2y = 92
 
+        middlex = 36
+        middley = 74
+
         textoption = {}
         if position == 1 then
             textoption.x = column1x
@@ -17,9 +20,12 @@ function create_text_option(text,
         elseif position == 3 then
             textoption.x = column1x
             textoption.y = row2y
-        else
+        elseif position == 4 then
             textoption.x = column2x
             textoption.y = row2y
+        elseif position == 5 then
+            textoption.x = middlex
+            textoption.y = middley
         end
         
         textoption.position = position
@@ -49,6 +55,7 @@ function create_text_option(text,
         rect(textoption.x, textoption.y,
                             endx, endy, boxcolor)
         print(textoption.text, textx, texty)
+        
     end
 
     function convert_to_topic_numbers(target_topics)

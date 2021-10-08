@@ -50,6 +50,15 @@ function generate_cosmic_force()
 
     end
 
+    cosmic_force.get_danger_level = function()
+        danger_level = ceil((cosmic_force.engagement + 11) / 2)
+        
+        if (danger_level > 11) danger_level = 11
+    	if (danger_level < 1 ) danger_level = 1
+
+        return danger_level
+    end
+
 
     return cosmic_force
 end

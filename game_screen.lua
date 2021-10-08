@@ -20,6 +20,7 @@ function expand_cosmic_voice_box()
     ending_bottom = 50
 
     if(game_animation_orchestrator.expand_timer == expand_que) then
+        rectfill(6, ending_top + 1, 122, ending_bottom - 1, 5)
         rect(5, ending_top, 123, ending_bottom, 6)
         return true
     end
@@ -29,6 +30,7 @@ function expand_cosmic_voice_box()
     elseif game_animation_orchestrator.expand_timer <= expand_que then
         box_top = starting_top - (((abs(starting_top - ending_top))/expand_time) * (game_animation_orchestrator.expand_timer - blink_que)) 
         box_bottom = starting_bottom + (((abs(starting_bottom - ending_bottom))/expand_time) * (game_animation_orchestrator.expand_timer - blink_que))
+        rectfill(6, box_top + 1, 122, box_bottom - 1, 5)
         rect(5, box_top, 123, box_bottom, 6)
     end
 
@@ -50,13 +52,14 @@ function collapse_cosmic_voice_box(starting_top, starting_bottom)
         elseif game_animation_orchestrator.collapse_timer <= collapse_que then
             box_top = starting_top + (((abs(starting_top - ending_top))/collapse_que) * game_animation_orchestrator.collapse_timer) 
             box_bottom = starting_bottom - ((abs(starting_bottom - ending_bottom)/collapse_que) * game_animation_orchestrator.collapse_timer)
+            rectfill(6, box_top + 1, 122, box_bottom - 1, 5)
             rect(5, box_top, 123, box_bottom, 6)
         end
 
         increment_collapse_timer()
         return false
     end
-
+    game.set_observe_state()
     return true
 end
 

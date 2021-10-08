@@ -28,11 +28,13 @@ function _init()
 	content_prompts = get_content_prompts()
 
 	musing = true
+	music(1, 0, 8)
 end
 
 function _update()
+	
 	if not game_win and not game_lose  then
-		play_controls()
+		update_game(game.state)
 		check_game_lose(cosmic_force.engagement)
 		check_game_win(current_turn)
 	end
@@ -40,27 +42,21 @@ end
 
 function _draw()
  cls(0)
+
+ draw_game(game.state)
+
+ --[[
  draw_text_option(option1)
  draw_text_option(option2)
  draw_text_option(option3)
  draw_text_option(option4)
 
-danger_level = ceil((cosmic_force.engagement + 11) / 2), 0, 7
-if (danger_level > 11) danger_level = 11
-if(danger_level < 1 ) danger_level = 1
- --expand_cosmic_voice_box()
- --draw_textbox()
  --draw_atmosphere[danger_level](cosmic_force.stars)
- print(danger_level, 0, 0, 7)
- --print('cosmo stars '..#cosmic_force.stars, 20, 20, 7)
- --display_force_status(cosmic_force)
-if(musing) force_muses() else end_muse()
-
-
---print('turn: '..current_turn..' win at: 10', 1, 1, 7)
+]]
  if(game_lose) print('You lose', 50, 50, 7)
  if(game_win) print('YOU WIN?!?', 50, 50, 7)
  col = 7
+ 
 end
 
 function check_game_win(turn)
@@ -75,13 +71,19 @@ end
 
 -->8
 --textoption
-#include text_option.lua 
-#include cosmic_force.lua
-#include topics.lua
-#include controls.lua
-#include cosmic_force_prompts.lua
 #include atmosphere.lua
+#include commune_state.lua
+#include controls.lua
+#include cosmic_force.lua
+#include cosmic_force_prompts.lua
+#include draw_game.lua
 #include game_screen.lua
+#include game_state.lua
+#include observe_state.lua
+#include text_option.lua 
+#include topics.lua
+#include update_game.lua
+
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -90,3 +92,9 @@ __gfx__
 00077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00700700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+__sfx__
+001100000075000750007500075000750007500075000750007500075000050000500075001750027500075000750007500075000750007500075000750007500205001050007500075000750007500075000750
+__music__
+01 00000000
+02 00000000
+
