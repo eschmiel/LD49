@@ -19,5 +19,7 @@ function play_controls()
         end
         cosmic_force.new_prompt()
         current_turn += 1
+
+        musing = false
     end
 end

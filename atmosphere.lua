@@ -28,7 +28,9 @@ draw_atmosphere[6] = function(stars)
     line(0, 30, 128, 30, 7)
     line(0, 23, 128, 23, 0) -- black line
 
-    generate_stars(5)
+    
+
+    draw_stars(stars)
 end
 
 draw_atmosphere[7] = function(stars)
@@ -64,7 +66,7 @@ draw_atmosphere[11] = function(stars)
     draw_stars(stars)
 end
 
-function generate_stars(number_of_stars)
+function add_stars(number_of_stars)
     stars = {}
     for x=1, number_of_stars do 
         new_star = {ceil(rnd(127)), ceil(rnd(49))}
@@ -76,7 +78,9 @@ end
 function draw_stars(stars)
     for x=1, #stars do
         pset(stars[x][1], stars[x][2], 7)
+
     end
+    
 end
 
 

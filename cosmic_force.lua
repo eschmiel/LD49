@@ -41,12 +41,14 @@ function generate_cosmic_force()
 
     cosmic_force.create_stars = function()
 
-        number_of_stars = 5 * (cosmic_force.engagement -10)
+        --number_of_stars = 5 * (cosmic_force.engagement - 10) 
+        new_stars = add_stars(20)
+        
+        for star in all(new_stars) do
+            add(cosmic_force.stars, star)
+        end
 
-        cosmic_force.stars = generate_stars(number_of_stars)
     end
-
-    cosmic_force.create_stars()
 
 
     return cosmic_force
@@ -64,8 +66,17 @@ end
 function force_muses()
     --print("there is such vigor\n in the world. \nroaring, biting, stinging, \nfeasting, fornicating. \na bear's belly of wobbling\n swollen succulence. \ni am such a glutton for life.", 5, 10)
     --print("have you ever labored in\n futility? to work so \nhard towards an impossible \n goal? was it worth it?", 10, 20)
-    print(content_prompts[cosmic_force.prompt], 10, 5, 6)
-    --print('engagement: '..cosmic_force.engagement, 10, 40, 0)
+    
+    if (expand_cosmic_voice_box()) then
+        if cosmic_force.engagement < 0 then print(aggressive_prompts[cosmic_force.prompt], 10, 8, 6)
+        else print(content_prompts[cosmic_force.prompt], 10, 8, 6)
+        end
+    end
+        --print('engagement: '..cosmic_force.engagement, 10, 40, 0)
+end
+
+function end_muse()
+    collapse_cosmic_voice_box(5, 50)
 end
 
 function display_force_status(force)

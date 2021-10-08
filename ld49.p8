@@ -26,6 +26,8 @@ function _init()
 
 	aggressive_prompts = get_aggressive_prompts()
 	content_prompts = get_content_prompts()
+
+	musing = true
 end
 
 function _update()
@@ -42,14 +44,17 @@ function _draw()
  draw_text_option(option2)
  draw_text_option(option3)
  draw_text_option(option4)
-print(ceil((cosmic_force.engagement + 11) / 2), 0, 7)
+
 danger_level = ceil((cosmic_force.engagement + 11) / 2), 0, 7
 if (danger_level > 11) danger_level = 11
 if(danger_level < 1 ) danger_level = 1
- draw_atmosphere[danger_level](cosmic_force.stars)
+ --expand_cosmic_voice_box()
+ --draw_textbox()
+ --draw_atmosphere[danger_level](cosmic_force.stars)
  print(danger_level, 0, 0, 7)
+ --print('cosmo stars '..#cosmic_force.stars, 20, 20, 7)
  --display_force_status(cosmic_force)
-force_muses()
+if(musing) force_muses() else end_muse()
 
 
 --print('turn: '..current_turn..' win at: 10', 1, 1, 7)
@@ -76,6 +81,7 @@ end
 #include controls.lua
 #include cosmic_force_prompts.lua
 #include atmosphere.lua
+#include game_screen.lua
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
