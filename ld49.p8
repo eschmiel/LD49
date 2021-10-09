@@ -34,6 +34,7 @@ end
 function _update()
 	
 	if not game_win and not game_lose  then
+		--update_game('test_prompt_format')
 		update_game(game.state)
 		check_game_lose(cosmic_force.engagement)
 		check_game_win(current_turn)
@@ -43,16 +44,9 @@ end
 function _draw()
  cls(0)
 
- draw_game(game.state)
-
- --[[
- draw_text_option(option1)
- draw_text_option(option2)
- draw_text_option(option3)
- draw_text_option(option4)
-
- --draw_atmosphere[danger_level](cosmic_force.stars)
-]]
+ 
+draw_game(game.state)
+ --draw_game('test_prompt_format')
  if(game_lose) print('You lose', 50, 50, 7)
  if(game_win) print('YOU WIN?!?', 50, 50, 7)
  col = 7
@@ -80,9 +74,12 @@ end
 #include game_screen.lua
 #include game_state.lua
 #include observe_state.lua
+#include text_handling.lua
 #include text_option.lua 
 #include topics.lua
 #include update_game.lua
+
+#include debug_controls.lua
 
 
 __gfx__

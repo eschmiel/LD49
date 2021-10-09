@@ -1,4 +1,4 @@
-function create_text_option(text,
+function create_text_option(text_block,
     topics, position)
 
         column1x = 5
@@ -29,7 +29,7 @@ function create_text_option(text,
         end
         
         textoption.position = position
-        textoption.text = text
+        textoption.text_block = text_block
         textoption.topics = convert_to_topic_numbers(topics)
         textoption.selected = false
         
@@ -54,7 +54,7 @@ function create_text_option(text,
         
         rect(textoption.x, textoption.y,
                             endx, endy, boxcolor)
-        print(textoption.text, textx, texty)
+        print(textoption.text_block, textx, texty)
         
     end
 

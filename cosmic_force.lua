@@ -6,8 +6,9 @@ function generate_cosmic_force()
     cosmic_force.engagement = 0
     cosmic_force.disposition = {}
     cosmic_force.used_aggressive_prompts = {}
-    cosmic_force.used_content_prompts = {}
+    cosmic_force.used_content_prompts = {3}
     cosmic_force.stars = {}
+    cosmic_force.prompt = 3
 
     for x=1, #master_topic_list do
         cosmic_force.disposition[x] = ceil(rnd(11)) - 5
@@ -66,22 +67,15 @@ end
 function commune_with_force(force, topic) 
     force.engagement += force.disposition[topic]
     force.create_stars()
---[[
-    if (force.engagement < minimum_engagement) force.engagement = minimum_engagement
-    if (force.engagement > maximum_engagement) force.engagement = maximum_engagement
-]]
 end
 
+
 function force_muses()
-    --print("there is such vigor\n in the world. \nroaring, biting, stinging, \nfeasting, fornicating. \na bear's belly of wobbling\n swollen succulence. \ni am such a glutton for life.", 5, 10)
-    --print("have you ever labored in\n futility? to work so \nhard towards an impossible \n goal? was it worth it?", 10, 20)
-    
     if (expand_cosmic_voice_box()) then
-        if cosmic_force.engagement < 0 then print(aggressive_prompts[cosmic_force.prompt], 10, 8, 6)
-        else print(content_prompts[cosmic_force.prompt], 10, 8, 6)
+        if cosmic_force.engagement < 0 then print_text_block(aggressive_prompts[cosmic_force.prompt], 10, 8)
+        else print_text_block(content_prompts[cosmic_force.prompt], 10, 8)
         end
     end
-        --print('engagement: '..cosmic_force.engagement, 10, 40, 0)
 end
 
 function end_muse()
