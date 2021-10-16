@@ -28,14 +28,14 @@ function _init()
 	content_prompts = get_content_prompts()
 
 	musing = true
-	music(1, 0, 8)
+	--music(1, 0, 8)
 end
 
 function _update()
 	
 	if not game_win and not game_lose  then
-		--update_game('test_prompt_format')
-		update_game(game.state)
+		update_game('test_prompt_format')
+		--update_game(game.state)
 		check_game_lose(cosmic_force.engagement)
 		check_game_win(current_turn)
 	end
@@ -45,8 +45,8 @@ function _draw()
  cls(0)
 
  
-draw_game(game.state)
- --draw_game('test_prompt_format')
+--draw_game(game.state)
+ draw_game('test_prompt_format')
  if(game_lose) print('You lose', 50, 50, 7)
  if(game_win) print('YOU WIN?!?', 50, 50, 7)
  col = 7
@@ -71,7 +71,7 @@ end
 #include cosmic_force.lua
 #include cosmic_force_prompts.lua
 #include draw_game.lua
-#include game_screen.lua
+#include text_box.lua
 #include game_state.lua
 #include observe_state.lua
 #include text_handling.lua

@@ -18,12 +18,25 @@ end
 
 draw_atmosphere[5] = function(stars)
     rectfill(0, 50, 128, 0, 12)
+    circ(64, 328, 291, 13)
+    circ(64, 333, 291, 13)
+    circ(64, 333, 290, 13)
+    circ(64, 333, 289, 2)
+
+    dither_area(0, 0, 128, 4, 2, 1, 7)
+    dither_line(1, 2, 128, 2, 6)
+    dither_area(1, 5, 128, 4, 4, 1, 6)
+    dither_area(0, 5, 128, 4, 4, 1, 7)
+    --dither_area(0, 6, 128, 4, 4, 1, 7)
+    dither_area(3, 11, 128, 8, 6, 2, 7)
+    dither_area(0, 11, 128, 4, 6, 2, 6)
+  
 end
 
 draw_atmosphere[6] = function(stars)
     rectfill(0, 50, 128, 35, 12) --light blue
     rectfill(0, 34, 128, 19, 1) --deep blue
-    rectfill(0, 45, 128, 42, 7)--white lines
+    rectfill(0, 44, 128, 46, 7)--white lines
     rectfill(0, 38, 128, 37, 7)
     line(0, 30, 128, 30, 7)
     line(0, 23, 128, 23, 0) -- black line
@@ -86,6 +99,30 @@ end
 
 function generate_atmosphere(engagement)
     color_warning={10, 8, 9, 2, 4, 12, 7, 1,0}
+end
+
+function dither_area(x, y, width, height, spread_x, spread_y, color)
+    dot_count = x 
+    line_count = y
+    completed_lines = 0
+
+    while (line_count <= y + height) do
+        while(dot_count <= x + width) do
+            pset(dot_count, line_count, color)
+            dot_count += spread_x
+        end
+        completed_lines +=1
+        line_count += spread_y
+        
+        if((completed_lines%2) == 0) dot_count = x else dot_count = x + spread_x / 2
+    end
+end
+
+function dither_line(x, y, width, spread, color)
+    while(dot_count <= x + width) do
+        pset(x, y, color)
+        x += spread
+    end
 end
 --[[
 10 - 0

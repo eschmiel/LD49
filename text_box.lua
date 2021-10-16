@@ -9,19 +9,37 @@ function draw_textbox()
     rectfill(7, 7, 121, 43, 5)
 end
 
-function expand_cosmic_voice_box()
+function expand_cosmic_voice_box(text_block)
     blink_que = 15
     expand_que = 45
     expand_time = expand_que - blink_que
-
+    
     starting_top = 25
-    ending_top = 5
     starting_bottom = 25
-    ending_bottom = 50
 
+    expand_y_distance = #text_block * 6 / 2
+    ending_top = starting_top - expand_y_distance - 5
+    ending_bottom = starting_bottom + expand_y_distance + 3
+
+    if(ending_top < 0) then 
+        ending_bottom_adjustment = abs(ending_top)
+        ending_top = 0
+        ending_bottom += ending_bottom_adjustment
+    end
+
+    longest_line = ''
+
+    for x=1, #text_block do
+        if (#text_block[x] > #longest_line) longest_line = text_block[x]
+    end
+
+    expand_x_distance = #longest_line * 4 / 2
+    ending_left = 60 - expand_x_distance
+    ending_right = 68 + expand_x_distance
+    
     if(game_animation_orchestrator.expand_timer == expand_que) then
-        rectfill(6, ending_top + 1, 122, ending_bottom - 1, 5)
-        rect(5, ending_top, 123, ending_bottom, 6)
+        rectfill(ending_left, ending_top + 1, ending_right, ending_bottom - 1, 5)
+        rect(ending_left, ending_top, ending_right, ending_bottom, 6)
         return true
     end
 
@@ -30,8 +48,8 @@ function expand_cosmic_voice_box()
     elseif game_animation_orchestrator.expand_timer <= expand_que then
         box_top = starting_top - (((abs(starting_top - ending_top))/expand_time) * (game_animation_orchestrator.expand_timer - blink_que)) 
         box_bottom = starting_bottom + (((abs(starting_bottom - ending_bottom))/expand_time) * (game_animation_orchestrator.expand_timer - blink_que))
-        rectfill(6, box_top + 1, 122, box_bottom - 1, 5)
-        rect(5, box_top, 123, box_bottom, 6)
+        rectfill(ending_left, box_top + 1, ending_right, box_bottom - 1, 5)
+        rect(ending_left, box_top, ending_right, box_bottom, 6)
     end
 
     increment_expand_timer()

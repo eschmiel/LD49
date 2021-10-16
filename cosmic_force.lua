@@ -71,11 +71,22 @@ end
 
 
 function force_muses()
-    if (expand_cosmic_voice_box()) then
-        if cosmic_force.engagement < 0 then print_text_block(aggressive_prompts[cosmic_force.prompt], 10, 8)
-        else print_text_block(content_prompts[cosmic_force.prompt], 10, 8)
-        end
+    if cosmic_force.engagement < 0 then prompt = aggressive_prompts[cosmic_force.prompt]
+    else prompt = content_prompts[cosmic_force.prompt]
     end
+
+    prompt_y = 25 - ((#prompt * 6) / 2) 
+    if(prompt_y < 5) prompt_y = 5
+
+    longest_line = ''
+
+    for x=1, #prompt do
+        if (#prompt[x] > #longest_line) longest_line = prompt[x]
+    end
+
+    prompt_x = 65 - #longest_line * 4 / 2
+
+    if(expand_cosmic_voice_box(prompt)) print_text_block(prompt, prompt_x, prompt_y)
 end
 
 function end_muse()
