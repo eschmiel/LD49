@@ -14,10 +14,12 @@ end
 
 draw_atmosphere[4] = function(stars)
     rectfill(0, 50, 128, 0, 13)
-    --dither_line(-2, 0, 128, 2, 12)
-    dither_line(2, 1, 128, 2, 12)
-    line(0, 0, 128, 0, 12)
-    spr(5, 20, 20, 3, 2)
+    --dither_line(-1, 7, 128, 2, 12)
+    --dither_line(-2, 1, 128, 2, 12)
+    --dither_line(1, 3, 128, 4, 12)
+    --line(0, 0, 128, 0, 1)
+    --line(0, 10, 128, 7, 1)
+    --spr(5, 20, 20, 3, 2)
     --[[for x=0, 128 do 
         if x%7 == 0 then
             spr(8, x, 8, 1, 1)
@@ -28,7 +30,18 @@ draw_atmosphere[4] = function(stars)
         end
 
     ]]
-    draw_cloud_layer(9, .5)
+
+
+    
+    dither_area(-2, 40, 128, 4, 8, 4, 14)
+    dither_area(0, 46, 128, 2, 4, 2, 14)
+    dither_line(0, 50, 128, 4, 14)
+    dither_line(2, 50, 128, 4, 9)
+    drift_cloud()
+    draw_cloud_layer(12, .05)
+    draw_cloud_layer(8, .1)
+    draw_cloud_layer(9, .2)
+    
     
     
 end
@@ -143,32 +156,47 @@ function dither_line(x, y, width, spread, color)
     end
 end
 
-function draw_cloud(x, y, width, height)
-    draw_cloud_curve(x, y, width, height, 5, 3)
-    draw_cloud_curve(x + 6, y + 2 , width - 5, height -5, 3, 0)
-end
-
-
-function draw_cloud_curve(x, y, width, height, cover_x_offset, cover_y_offset)
-    oval(x, y, x + width, y + height, 2)
-    rectfill(x + cover_x_offset, y, x + width + cover_x_offset, y + height / 2 + cover_y_offset, 13)
-end
-
 function draw_cloud_layer(sprite, speed)
-    cloud_offset = 0
-    cloud_offset += game_animation_orchestrator.cloud_layer_1_timer * speed
+    current_index = 0
+    sprite_length = 0
+    y = 0
+
     if sprite == 9 then
-        for x=-15, 128 do 
-            if x%15 == 0 then
-                spr(9, x + cloud_offset, 0, 2, 1)
-            end
-        end
-
-        increment_cloud_layer_1_timer()
-
-        
-        if (cloud_offset > 15) cloud_offset = 0 reset_cloud_layer_1_timer()
+        current_index = 1
+        sprite_length = 15
+        y = 0
+        width = 2
+    elseif sprite == 8 then
+        current_index = 2
+        sprite_length = 7
+        y = 7
+        width = 1
+    elseif sprite == 12 then
+        current_index = 3
+        sprite_length = 4
+        y = 10
+        width = 1    
     end
+
+    cloud_offset = game_animation_orchestrator.cloud_layer_timer[current_index] * speed
+    
+    for x = -sprite_length, 128 do 
+        if x % sprite_length == 0 then
+            spr(sprite, x + cloud_offset, y, width, 1)
+        end
+    end
+
+    increment_cloud_layer_timer(current_index)    
+    if cloud_offset > sprite_length then 
+        reset_cloud_layer_timer(current_index)
+    end
+end
+
+function drift_cloud()
+    speed = .25
+    cloud_x = game_animation_orchestrator.drift_cloud_timer * speed
+    spr(5, cloud_x, 20, 3, 2)
+    increment_drift_cloud_timer()
 end
 --[[
 10 - 0
