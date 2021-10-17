@@ -1,9 +1,3 @@
-game_animation_orchestrator = {}
-
-game_animation_orchestrator.expand_timer = 1
-game_animation_orchestrator.collapse_timer = 1
-
-
 function draw_textbox()
     rect(5, 5, 123, 45, 6)
     rectfill(7, 7, 121, 43, 5)
@@ -81,18 +75,3 @@ function collapse_cosmic_voice_box(starting_top, starting_bottom)
     return true
 end
 
-function increment_expand_timer()
-    game_animation_orchestrator.expand_timer += 1
-end
-
-function increment_collapse_timer()
-    game_animation_orchestrator.collapse_timer += 1
-end
-
-function reset_expand_timer()
-    game_animation_orchestrator.expand_timer = 1
-end
-
-function reset_collapse_timer()
-    game_animation_orchestrator.collapse_timer = 1
-end

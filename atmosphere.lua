@@ -13,7 +13,24 @@ draw_atmosphere[3] = function(stars)
 end
 
 draw_atmosphere[4] = function(stars)
-    rectfill(0, 50, 128, 0, 10)
+    rectfill(0, 50, 128, 0, 13)
+    --dither_line(-2, 0, 128, 2, 12)
+    dither_line(2, 1, 128, 2, 12)
+    line(0, 0, 128, 0, 12)
+    spr(5, 20, 20, 3, 2)
+    --[[for x=0, 128 do 
+        if x%7 == 0 then
+            spr(8, x, 8, 1, 1)
+        end
+
+        if x%15 == 0 then
+            spr(9, x, 0, 2, 1)
+        end
+
+    ]]
+    draw_cloud_layer(9, .5)
+    
+    
 end
 
 draw_atmosphere[5] = function(stars)
@@ -119,9 +136,38 @@ function dither_area(x, y, width, height, spread_x, spread_y, color)
 end
 
 function dither_line(x, y, width, spread, color)
+    dot_count = x
     while(dot_count <= x + width) do
-        pset(x, y, color)
-        x += spread
+        pset(dot_count, y, color)
+        dot_count += spread
+    end
+end
+
+function draw_cloud(x, y, width, height)
+    draw_cloud_curve(x, y, width, height, 5, 3)
+    draw_cloud_curve(x + 6, y + 2 , width - 5, height -5, 3, 0)
+end
+
+
+function draw_cloud_curve(x, y, width, height, cover_x_offset, cover_y_offset)
+    oval(x, y, x + width, y + height, 2)
+    rectfill(x + cover_x_offset, y, x + width + cover_x_offset, y + height / 2 + cover_y_offset, 13)
+end
+
+function draw_cloud_layer(sprite, speed)
+    cloud_offset = 0
+    cloud_offset += game_animation_orchestrator.cloud_layer_1_timer * speed
+    if sprite == 9 then
+        for x=-15, 128 do 
+            if x%15 == 0 then
+                spr(9, x + cloud_offset, 0, 2, 1)
+            end
+        end
+
+        increment_cloud_layer_1_timer()
+
+        
+        if (cloud_offset > 15) cloud_offset = 0 reset_cloud_layer_1_timer()
     end
 end
 --[[

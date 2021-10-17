@@ -1,5 +1,5 @@
 test_data = {}
-test_data.test_engagement = 0
+test_data.test_engagement = -3
 test_data.test_prompt = 1
 
 function test_prompt_format_controls()
